@@ -27,4 +27,24 @@ RSpec.describe 'The petss API' do
       expect(pets[:attributes][:user_id]).to be_a(Integer)
     end
   end
+
+  it 'sends a single pet info' do
+    user = create(:user)
+    create_list(:pet, 3, user_id: user.id)
+
+    get "/api/v1/pets/#{Pet.first.id}"
+
+    response_body = JSON.parse(response.body, symbolize_names: true)
+
+    pet = response_body[:data]
+    expect(pet).to have_key(:id)
+    expect(pet).to have_key(:attributes)
+    expect(pet[:attributes][:name]).to be_a(String)
+    expect(pet[:attributes][:breed]).to be_a(String)
+    expect(pet[:attributes][:sex]).to be_a(String)
+    expect(pet[:attributes][:bio]).to be_a(String)
+    expect(pet[:attributes][:weight]).to be_a(Integer)
+    expect(pet[:attributes][:age]).to be_a(Integer)
+    expect(pet[:attributes][:user_id]).to be_a(Integer)
+  end
 end
