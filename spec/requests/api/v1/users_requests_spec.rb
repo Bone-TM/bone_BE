@@ -46,7 +46,7 @@ it 'creates a user' do
     expect(created_user.auth_token).to eq(user_params[:auth_token])
     expect(created_user.location).to eq(user_params[:location])
   end
-  
+
   it 'can send a list of a specified users information' do
     user = create(:user)
     pet1 = create(:pet, user_id: user.id)
@@ -67,7 +67,7 @@ it 'creates a user' do
     expect(parsed_user[:attributes][:name]).to eq user.name
     expect(parsed_user[:attributes][:bio]).to eq user.bio
     expect(parsed_user[:attributes][:email]).to eq user.email
-    expect(parsed_user[:attributes][:password_digest]).to eq user.password_digest
+    expect(parsed_user[:attributes][:auth_token]).to eq user.auth_token
     expect(parsed_user[:attributes][:location]).to eq user.location
     expect(parsed_user[:attributes][:pets].count).to eq 3
     expect(parsed_user[:attributes][:pets][0][:name]).to eq pet1.name
