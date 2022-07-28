@@ -4,5 +4,6 @@ class UserSerializer
              :bio,
              :email,
              :password_digest,
-             :location
+             :location,
+             :pets
 end
