@@ -27,4 +27,32 @@ RSpec.describe 'The pets API' do
       expect(pets[:attributes][:user_id]).to be_a(Integer)
     end
   end
+
+  it 'creates an pet' do
+    user = create(:user)
+
+    pet_params = {
+      name: 'Macpet 43',
+      breed: "We think you're gonna love this",
+      sex: 'female',
+      bio: 'Am dog',
+      weight: 147,
+      age: 10,
+      user_id: user.id
+    }
+    headers = { 'CONTENT_TYPE' => 'application/json' }
+
+    post '/api/v1/pets', headers: headers, params: JSON.generate(pet: pet_params)
+
+    created_pet = Pet.last
+
+    expect(response).to be_successful
+    expect(created_pet.name).to eq(pet_params[:name])
+    expect(created_pet.breed).to eq(pet_params[:breed])
+    expect(created_pet.sex).to eq(pet_params[:sex])
+    expect(created_pet.bio).to eq(pet_params[:bio])
+    expect(created_pet.weight).to eq(pet_params[:weight])
+    expect(created_pet.age).to eq(pet_params[:age])
+    expect(created_pet.user_id).to eq(pet_params[:user_id])
+  end
 end
