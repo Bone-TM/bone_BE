@@ -20,11 +20,33 @@ RSpec.describe 'The users API' do
       expect(user[:attributes][:name]).to be_a(String)
       expect(user[:attributes][:bio]).to be_a(String)
       expect(user[:attributes][:email]).to be_a(String)
-      expect(user[:attributes][:password_digest]).to be_a(String)
+      expect(user[:attributes][:auth_token]).to be_a(String)
       expect(user[:attributes][:location]).to be_a(String)
     end
   end
 
+it 'creates a user' do
+    user_params = {
+      name: 'Peter Pilsbury',
+      bio: 'Capital P.',
+      email: 'doughboy@aol.com',
+      auth_token: 'l423789otgf3q4ijghlaisduk',
+      location: 'Denver, CO'
+    }
+    headers = { 'CONTENT_TYPE' => 'application/json' }
+
+    post '/api/v1/users', headers: headers, params: JSON.generate(user: user_params)
+
+    created_user = User.last
+
+    expect(response).to be_successful
+    expect(created_user.name).to eq(user_params[:name])
+    expect(created_user.bio).to eq(user_params[:bio])
+    expect(created_user.email).to eq(user_params[:email])
+    expect(created_user.auth_token).to eq(user_params[:auth_token])
+    expect(created_user.location).to eq(user_params[:location])
+  end
+  
   it 'can send a list of a specified users information' do
     user = create(:user)
     pet1 = create(:pet, user_id: user.id)
