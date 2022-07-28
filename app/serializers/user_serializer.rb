@@ -4,5 +4,6 @@ class UserSerializer
              :bio,
              :email,
              :auth_token,
-             :location
+             :location,
+             :pets
 end
