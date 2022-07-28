@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'The petss API' do
+RSpec.describe 'The pets API' do
   it 'sends a list of all pets' do
     user = create(:user)
     create_list(:pet, 3, user_id: user.id)
