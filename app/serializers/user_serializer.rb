@@ -3,6 +3,7 @@ class UserSerializer
   attributes :name,
              :bio,
              :email,
-             :password_digest,
-             :location
+             :auth_token,
+             :location,
+             :pets
 end

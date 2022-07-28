@@ -4,9 +4,10 @@ class User < ApplicationRecord
 
   validates_presence_of :name,
                         :email,
-                        :password_digest,
+                        :auth_token,
                         :location,
                         :bio
 
-  validates_uniqueness_of :email
+  validates_uniqueness_of :email,
+                          :auth_token
 end
