@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   namespace 'api' do
     namespace 'v1' do
       resources 'users', only: %i[index create] do
-        resources 'pets', only: %i[index create]
+        resources 'pets', only: :create
       end
+      resources 'pets', only: :index
     end
   end
 end
