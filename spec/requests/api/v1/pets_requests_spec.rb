@@ -75,4 +75,25 @@ RSpec.describe 'The pets API' do
     expect(pet[:attributes][:age]).to be_a(Integer)
     expect(pet[:attributes][:user_id]).to be_a(Integer)
   end
+
+  it 'deletes a pet' do
+    user = create(:user)
+    create_list(:pet, 3, user_id: user.id)
+
+    delete "/api/v1/pets/#{Pet.first.id}"
+    pets = Pet.all
+
+    expect(pets.count).to eq(2)
+  end
+
+  it 'delete request fails on bad id' do
+    user = create(:user)
+    create_list(:pet, 3, user_id: user.id)
+
+    delete "/api/v1/pets/1234567"
+    pets = Pet.all
+
+    expect(pets.count).to eq(3)
+    expect(response.status).to eq(404)
+  end
 end
