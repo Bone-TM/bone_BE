@@ -42,6 +42,7 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
+      - run: mkdir ~/rspec
       # - node/install-packages:
       #     pkg-manager: yarn
       #     cache-key: "yarn.lock"
@@ -54,6 +55,8 @@ jobs:
           name: Database setup
           command: bundle exec rails db:create db:schema:load --trace
       - ruby/rspec-test
+      -store_test_results:
+        path: ~/rspec
 # We use workflows to orchestrate the jobs that we declared above.
 workflows:
   version: 2
