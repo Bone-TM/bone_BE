@@ -9,6 +9,10 @@ module Api
         render json: UserSerializer.new(User.create(user_params)), status: :created
       end
 
+      def destroy
+        render json: User.find(params[:id]).destroy
+      end
+
       def show
         user = User.find(params[:id])
         render json: UserSerializer.new(user)
