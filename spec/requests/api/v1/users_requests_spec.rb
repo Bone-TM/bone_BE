@@ -20,12 +20,11 @@ RSpec.describe 'The users API' do
       expect(user[:attributes][:name]).to be_a(String)
       expect(user[:attributes][:bio]).to be_a(String)
       expect(user[:attributes][:email]).to be_a(String)
-      expect(user[:attributes][:auth_token]).to be_a(String)
       expect(user[:attributes][:location]).to be_a(String)
     end
   end
 
-it 'creates a user' do
+  it 'creates a user' do
     user_params = {
       name: 'Peter Pilsbury',
       bio: 'Capital P.',
