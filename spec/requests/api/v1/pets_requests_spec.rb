@@ -96,4 +96,57 @@ RSpec.describe 'The pets API' do
     expect(pets.count).to eq(3)
     expect(response.status).to eq(404)
   end
+  it 'updates pet info' do
+    user = create(:user)
+    create_list(:pet, 3, user_id: user.id)
+    pet1 = Pet.first
+
+    pet_params = {
+      name: 'Macpet 43',
+      breed: "We think you're gonna love this",
+      sex: 'female',
+      bio: 'Am dog',
+      weight: 147,
+      age: 10,
+      user_id: user.id
+    }
+    headers = { 'CONTENT_TYPE' => 'application/json' }
+
+    patch "/api/v1/pets/#{pet1.id}", headers: headers, params: JSON.generate(pet: pet_params)
+    response_body = JSON.parse(response.body, symbolize_names: true)
+
+    pet = response_body[:data]
+    expect(pet).to have_key(:id)
+    expect(pet).to have_key(:attributes)
+    expect(pet[:attributes][:name]).to eq('Macpet 43')
+    expect(pet[:attributes][:breed]).to eq("We think you're gonna love this")
+    expect(pet[:attributes][:sex]).to eq('female')
+    expect(pet[:attributes][:bio]).to eq('Am dog')
+    expect(pet[:attributes][:weight]).to eq(147)
+    expect(pet[:attributes][:age]).to eq(10)
+    expect(pet[:attributes][:user_id]).to eq(user.id)
+  end
+
+  it 'returns error for unknown pet id' do
+    user = create(:user)
+    create_list(:pet, 3, user_id: user.id)
+    pet1 = Pet.first
+
+    pet_params = {
+      name: 'Macpet 43',
+      breed: "We think you're gonna love this",
+      sex: 'female',
+      bio: 'Am dog',
+      weight: 147,
+      age: 10,
+      user_id: user.id
+    }
+    headers = { 'CONTENT_TYPE' => 'application/json' }
+
+    patch "/api/v1/pets/1342565", headers: headers, params: JSON.generate(pet: pet_params)
+
+
+    expect(response.status).to eq(404)
+    expect(pet1.name).to_not eq('Macpet 43')
+  end
 end

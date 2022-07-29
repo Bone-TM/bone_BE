@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources 'users', only: %i[index create show] do
         resources 'pets', only: :create
       end
-      resources 'pets', only: [:index, :show, :destroy]
+      resources 'pets', only: [:index, :show, :destroy, :update]
     end
   end
 end

@@ -22,6 +22,16 @@ module Api
         end
       end
 
+      def update
+        begin
+          pet = Pet.find(params[:id])
+          pet.update(pet_params)
+          render json: PetSerializer.new(Pet.find(params[:id]))
+        rescue ActiveRecord::RecordNotFound
+          render status: 404
+        end
+      end
+
       private
 
       def pet_params
