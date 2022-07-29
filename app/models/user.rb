@@ -1,13 +1,9 @@
 class User < ApplicationRecord
-  has_many :pets
+  has_many :pets, dependent: :destroy
   has_many :matches, through: :pets
 
   validates_presence_of :name,
-                        :email,
-                        :auth_token,
-                        :location,
-                        :bio
+                        :email
 
-  validates_uniqueness_of :email,
-                          :auth_token
+  validates_uniqueness_of :email
 end
