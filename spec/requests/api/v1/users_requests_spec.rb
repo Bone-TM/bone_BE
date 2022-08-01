@@ -24,7 +24,7 @@ RSpec.describe 'The users API' do
     end
   end
 
-it 'creates a user' do
+  it 'creates a user' do
     user_params = {
       name: 'Peter Pilsbury',
       bio: 'Capital P.',
@@ -42,6 +42,22 @@ it 'creates a user' do
     expect(created_user.bio).to eq(user_params[:bio])
     expect(created_user.email).to eq(user_params[:email])
     expect(created_user.location).to eq(user_params[:location])
+  end
+
+  it 'deletes a user and their subsequent pets' do
+    user = create(:user)
+    pet1 = create(:pet, user_id: user.id)
+    pet2 = create(:pet, user_id: user.id)
+
+    expect(User.all.count).to eq 1
+    expect(Pet.all.count).to eq 2
+
+    delete "/api/v1/users/#{user.id}"
+
+    expect(response).to be_successful
+
+    expect(User.all.count).to eq 0
+    expect(Pet.all.count).to eq 0
   end
 
   it 'can send a list of a specified users information' do
