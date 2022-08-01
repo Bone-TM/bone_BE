@@ -33,7 +33,7 @@ RSpec.describe 'The users API' do
     }
     headers = { 'CONTENT_TYPE' => 'application/json' }
 
-    post '/api/v1/users', headers: headers, params: JSON.generate(user: user_params)
+    post '/api/v1/users', headers: headers, params: JSON.generate(user_params)
 
     created_user = User.last
 
