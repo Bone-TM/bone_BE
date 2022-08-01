@@ -1,5 +1,5 @@
 # Bone-TM Back End Database
-Bone is an application that provides dogs and their owners a safe way to connect for playdates end other events because dogs deserve a social life too.
+Bone is a blazingly fast application that provides dogs and their owners a safe way to connect for playdates end other events because dogs deserve a social life too.
 
 Using service based architecture, we created the back end database to accomodate our front end so that it could quickly and securely perform transactions through our API endpoints.
 
