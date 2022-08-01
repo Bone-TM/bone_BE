@@ -7,4 +7,9 @@ class User < ApplicationRecord
 
   validates_uniqueness_of :email
 
+  def self.find_by_email(email)
+    where('email ILIKE ?', "%#{email}%")
+      .order(:email)
+      .limit(1)
+  end
 end
