@@ -6,8 +6,8 @@ module Api
       end
 
       def create
-        binding.pry
-        render json: UserSerializer.new(User.create(user_params)), status: :created
+        user = User.create(user_params)
+        render json: UserSerializer.new(user), status: :created
       end
 
       def show
