@@ -75,4 +75,6 @@ Open your terminal and run these commands:
 * `bundle install`
 * `rails db:{drop,create,migrate,seed}`
 
+Due to the fact that this will be a local consumption, all endpoints you consume will start with `http://localhost:3000` by default unless specified otherwise.
+
 Now that everything is properly configured on your local machine, run `rails s` in your terminal to start the server and get consuming!
