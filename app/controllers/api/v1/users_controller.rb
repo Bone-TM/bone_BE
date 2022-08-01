@@ -6,12 +6,14 @@ module Api
       end
 
       def create
-        render json: UserSerializer.new(User.create(user_params)), status: :created
+        user = User.create(user_params)
+        render json: UserSerializer.new(user), status: :created
       end
 
       def destroy
         render json: User.find(params[:id]).destroy
       end
+
 
       def show
         user = User.find(params[:id])
@@ -21,7 +23,7 @@ module Api
       private
 
       def user_params
-        params.require(:user).permit(:name, :bio, :email, :auth_token, :location)
+        params.permit(:name, :bio, :email, :location)
       end
     end
   end
