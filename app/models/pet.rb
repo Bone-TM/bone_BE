@@ -8,4 +8,10 @@ class Pet < ApplicationRecord
                         :breed,
                         :bio,
                         :sex
+
+  def self.search(params)
+    if params[:breed]
+      pets = Pet.where("breed ILIKE '%#{params[:breed]}'")
+    end
+  end
 end
