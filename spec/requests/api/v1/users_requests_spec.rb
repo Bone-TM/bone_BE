@@ -29,7 +29,6 @@ RSpec.describe 'The users API' do
       name: 'Peter Pilsbury',
       bio: 'Capital P.',
       email: 'doughboy@aol.com',
-      auth_token: 'l423789otgf3q4ijghlaisduk',
       location: 'Denver, CO'
     }
     headers = { 'CONTENT_TYPE' => 'application/json' }
@@ -42,7 +41,6 @@ RSpec.describe 'The users API' do
     expect(created_user.name).to eq(user_params[:name])
     expect(created_user.bio).to eq(user_params[:bio])
     expect(created_user.email).to eq(user_params[:email])
-    expect(created_user.auth_token).to eq(user_params[:auth_token])
     expect(created_user.location).to eq(user_params[:location])
   end
 

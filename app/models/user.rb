@@ -6,4 +6,5 @@ class User < ApplicationRecord
                         :email
 
   validates_uniqueness_of :email
+
 end
