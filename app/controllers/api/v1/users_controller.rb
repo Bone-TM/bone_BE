@@ -6,6 +6,7 @@ module Api
       end
 
       def create
+        binding.pry
         render json: UserSerializer.new(User.create(user_params)), status: :created
       end
 
@@ -17,7 +18,7 @@ module Api
       private
 
       def user_params
-        params.permit(:name, :bio, :email, :auth_token, :location)
+        params.permit(:name, :bio, :email, :location)
       end
     end
   end
