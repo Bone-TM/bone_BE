@@ -21,14 +21,13 @@ class Pet < ApplicationRecord
       @pets_all << pets_age
     end
     if params[:weight]
-      pets_age = Pet.where("age BETWEEN '#{params[:weight][:min_weight]}' AND '#{params[:age][:max_weight]}'")
-      @pets_all << pets_age
+      pets_weight = Pet.where("weight BETWEEN '#{params[:weight][:min_weight]}' AND '#{params[:weight][:max_weight]}'")
+      @pets_all << pets_weight
     end
     if params[:sex]
-      pets_age = Pet.where("sex = '%#{params[:sex]}'")
+      pets_sex = Pet.where("sex = '#{params[:sex]}'")
       @pets_all << pets_sex
     end
-    binding.pry
 
     pets_final = @pets_all[0]
     if @pets_all.count > 1
