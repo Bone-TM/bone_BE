@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       namespace 'users' do
         get '/find', controller: :user_find, action: :find
       end
-      resources 'users', only: %i[index create show destroy] do
+      resources 'users' do
         resources 'pets', only: :create
       end
       resources 'pets', only: [:index, :show, :destroy, :update]

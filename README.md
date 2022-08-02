@@ -1,24 +1,14 @@
-# README
+# Bone-TM Back End DatabaseBone
+Bone is an application that provides dogs and their owners a safe way to connect for playdates end other events because dogs deserve a social life too.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Using service based architecture, we created the back end database to accomodate our front end so that it could quickly and securely perform transactions through our database.
 
-Things you may want to cover:
+![bone_be_diagram](https://user-images.githubusercontent.com/65498038/182235874-34c5055a-1b6e-46eb-adc6-ba4e2300029f.png)
 
-* Ruby version
+## Table of Contents
+* [Front End Application](https:/bone_be.herokuapp.com)
+* [Getting Started](#getting-started)
 
-* System dependencies
+<a name="getting-started"></a>
+## Getting Started
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

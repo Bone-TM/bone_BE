@@ -87,4 +87,20 @@ RSpec.describe 'The users API' do
     expect(parsed_user[:attributes][:pets][1][:name]).to eq pet2.name
     expect(parsed_user[:attributes][:pets][2][:name]).to eq pet3.name
   end
+
+  it 'can update a user' do
+    user = create(:user, name: 'Mike', email: 'jcrazay@mailmail.com', bio: '', location: '')
+
+    expect(user.bio).to eq('')
+    expect(user.location).to eq('')
+
+    patch api_v1_user_path(user.id), params: { bio: 'I just LOOOOve chocolate', location: 'Denver' }
+
+    expect(response).to be_successful
+    response_body = JSON.parse(response.body, symbolize_names: true)
+    updated_user = response_body[:data]
+
+    expect(updated_user[:attributes][:bio]).to eq('I just LOOOOve chocolate')
+    expect(updated_user[:attributes][:location]).to eq('Denver')
+  end
 end
