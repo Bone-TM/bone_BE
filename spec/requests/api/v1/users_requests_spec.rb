@@ -80,7 +80,6 @@ RSpec.describe 'The users API' do
     expect(parsed_user[:attributes][:name]).to eq user.name
     expect(parsed_user[:attributes][:bio]).to eq user.bio
     expect(parsed_user[:attributes][:email]).to eq user.email
-    expect(parsed_user[:attributes][:auth_token]).to eq user.auth_token
     expect(parsed_user[:attributes][:location]).to eq user.location
     expect(parsed_user[:attributes][:pets].count).to eq 3
     expect(parsed_user[:attributes][:pets][0][:name]).to eq pet1.name
