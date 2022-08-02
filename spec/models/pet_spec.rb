@@ -105,5 +105,6 @@ RSpec.describe Pet do
     pets = Pet.search({:weight=>{:min_weight=>10, :max_weight=>20}, :sex=>'male', :age=>{:min_age=>4, :max_age=>5}, :breed=>'husky'})
 
     expect(pets.count).to eq(1)
+    expect(pets.first.name).to eq('dog')
   end
 end
