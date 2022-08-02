@@ -32,6 +32,11 @@ module Api
         end
       end
 
+      def search
+        Pet.search(pet_params)
+
+      end
+
       private
 
       def pet_params
