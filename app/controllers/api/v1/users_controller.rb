@@ -14,9 +14,14 @@ module Api
         render json: User.find(params[:id]).destroy
       end
 
-
       def show
         user = User.find(params[:id])
+        render json: UserSerializer.new(user)
+      end
+
+      def update
+        user = User.find(params[:id])
+        user.update(user_params)
         render json: UserSerializer.new(user)
       end
 
