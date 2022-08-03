@@ -6,7 +6,8 @@ module Api
       end
 
       def create
-        render json: PetSerializer.new(Pet.create(pet_params)), status: :created
+        pet = Pet.create(pet_params)
+        render json: PetSerializer.new(pet), status: :created
       end
 
       def show
@@ -40,7 +41,7 @@ module Api
       private
 
       def pet_params
-        params.require(:pet).permit(:name, :breed, :sex, :bio, :weight, :age, :user_id)
+        params.permit(:name, :breed, :sex, :bio, :weight, :age, :user_id)
       end
     end
   end
