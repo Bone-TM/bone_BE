@@ -34,14 +34,14 @@ module Api
       end
 
       def search
-        Pet.search(pet_params)
-
+        pets = Pet.search(pet_params)
+        render json: PetSerializer.new(pets)
       end
 
       private
 
       def pet_params
-        params.permit(:name, :breed, :sex, :bio, :weight, :age, :user_id)
+        params.permit(:name, :breed, :sex, :bio, :weight, :age, :user_id, :min_age, :max_age, :min_weight, :max_weight)
       end
     end
   end

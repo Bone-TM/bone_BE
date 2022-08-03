@@ -43,7 +43,7 @@ RSpec.describe Pet do
     pe5 = Pet.create(name: 'arm', sex: 'male', bio: 'woof', breed: 'poodle', weight: 10, age: 3, user_id: us1.id)
     pe5 = Pet.create(name: 'arm', sex: 'female', bio: 'woof', breed: 'husky', weight: 5, age: 3, user_id: us1.id)
 
-    pets = Pet.search({:age=>{:min_age=>4, :max_age=>5}})
+    pets = Pet.search({:min_age=>4, :max_age=>5})
 
 
     expect(pets.count).to eq(3)
@@ -65,7 +65,6 @@ RSpec.describe Pet do
 
     pets = Pet.search({:sex=>'male'})
 
-
     expect(pets.count).to eq(5)
     pets.each do |pet|
       expect(pet.sex).to eq("male")
@@ -82,8 +81,7 @@ RSpec.describe Pet do
     pe5 = Pet.create(name: 'arm', sex: 'male', bio: 'woof', breed: 'poodle', weight: 10, age: 3, user_id: us1.id)
     pe5 = Pet.create(name: 'arm', sex: 'female', bio: 'woof', breed: 'husky', weight: 5, age: 3, user_id: us1.id)
 
-    pets = Pet.search({:weight=>{:min_weight=>10, :max_weight=>20}})
-
+    pets = Pet.search({:min_weight=>10, :max_weight=>20})
 
     expect(pets.count).to eq(3)
     pets.each do |pet|
@@ -102,7 +100,7 @@ RSpec.describe Pet do
     pe5 = Pet.create(name: 'arm', sex: 'male', bio: 'woof', breed: 'poodle', weight: 10, age: 3, user_id: us1.id)
     pe5 = Pet.create(name: 'arm', sex: 'female', bio: 'woof', breed: 'husky', weight: 5, age: 3, user_id: us1.id)
 
-    pets = Pet.search({:weight=>{:min_weight=>10, :max_weight=>20}, :sex=>'male', :age=>{:min_age=>4, :max_age=>5}, :breed=>'husky'})
+    pets = Pet.search({:min_weight=>10, :max_weight=>20, :sex=>'male', :min_age=>4, :max_age=>5, :breed=>'husky'})
 
     expect(pets.count).to eq(1)
     expect(pets.first.name).to eq('dog')

@@ -149,4 +149,55 @@ RSpec.describe 'The pets API' do
     expect(response.status).to eq(404)
     expect(pet1.name).to_not eq('Macpet 43')
   end
+
+  it 'search returns pets by multiple params' do
+
+    us1 = User.create(name: 'steve', email: 'steve@beve.com', bio: 'dogs r kewl', location: 'denver')
+    pe1 = Pet.create(name: 'jeeve', sex: 'male', bio: 'woof', breed: 'husky', weight: 30, age: 5, user_id: us1.id)
+    pe2 = Pet.create(name: 'cat', sex: 'male', bio: 'woof', breed: 'cocker-spaniel', weight: 25, age: 5, user_id: us1.id)
+    pe3 = Pet.create(name: 'dog', sex: 'male', bio: 'woof', breed: 'husky', weight: 20, age: 4, user_id: us1.id)
+    pe4 = Pet.create(name: 'cave', sex: 'male', bio: 'woof', breed: 'husky', weight: 15, age: 6, user_id: us1.id)
+    pe5 = Pet.create(name: 'arm', sex: 'male', bio: 'woof', breed: 'poodle', weight: 10, age: 3, user_id: us1.id)
+    pe5 = Pet.create(name: 'arm', sex: 'female', bio: 'woof', breed: 'husky', weight: 5, age: 3, user_id: us1.id)
+
+    pet_params = {
+      breed: 'husky',
+      min_age: 3,
+      max_age: 5
+    }
+    headers = { 'CONTENT_TYPE' => 'application/json' }
+
+    get '/api/v1/pets/search', headers: headers, params: pet_params
+    response_body = JSON.parse(response.body, symbolize_names: true)
+
+    pet = response_body[:data]
+
+    expect(pet.count).to eq(3)
+    expect(pet.first[:attributes][:name]).to eq('jeeve')
+  end
+
+  it 'search sad path no results' do
+
+    us1 = User.create(name: 'steve', email: 'steve@beve.com', bio: 'dogs r kewl', location: 'denver')
+    pe1 = Pet.create(name: 'jeeve', sex: 'male', bio: 'woof', breed: 'husky', weight: 30, age: 5, user_id: us1.id)
+    pe2 = Pet.create(name: 'cat', sex: 'male', bio: 'woof', breed: 'cocker-spaniel', weight: 25, age: 5, user_id: us1.id)
+    pe3 = Pet.create(name: 'dog', sex: 'male', bio: 'woof', breed: 'husky', weight: 20, age: 4, user_id: us1.id)
+    pe4 = Pet.create(name: 'cave', sex: 'male', bio: 'woof', breed: 'husky', weight: 15, age: 6, user_id: us1.id)
+    pe5 = Pet.create(name: 'arm', sex: 'male', bio: 'woof', breed: 'poodle', weight: 10, age: 3, user_id: us1.id)
+    pe5 = Pet.create(name: 'arm', sex: 'female', bio: 'woof', breed: 'husky', weight: 5, age: 3, user_id: us1.id)
+
+    pet_params = {
+      sex: 'male',
+      min_weight: 3,
+      max_weight: 6
+    }
+    headers = { 'CONTENT_TYPE' => 'application/json' }
+
+    get '/api/v1/pets/search', headers: headers, params: pet_params
+    response_body = JSON.parse(response.body, symbolize_names: true)
+
+    pet = response_body[:data]
+
+    expect(pet.count).to eq(0)
+  end
 end
