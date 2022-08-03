@@ -42,7 +42,7 @@ RSpec.describe 'The pets API' do
     }
     headers = { 'CONTENT_TYPE' => 'application/json' }
 
-    post "/api/v1/users/#{user.id}/pets", headers: headers, params: JSON.generate(pet: pet_params)
+    post "/api/v1/users/#{user.id}/pets", headers: headers, params: JSON.generate(pet_params)
 
     created_pet = Pet.last
 
@@ -112,7 +112,7 @@ RSpec.describe 'The pets API' do
     }
     headers = { 'CONTENT_TYPE' => 'application/json' }
 
-    patch "/api/v1/pets/#{pet1.id}", headers: headers, params: JSON.generate(pet: pet_params)
+    patch "/api/v1/pets/#{pet1.id}", headers: headers, params: JSON.generate(pet_params)
     response_body = JSON.parse(response.body, symbolize_names: true)
 
     pet = response_body[:data]
