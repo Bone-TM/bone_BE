@@ -162,7 +162,8 @@ RSpec.describe 'The pets API' do
 
     pet_params = {
       breed: 'husky',
-      sex: 'male',
+      min_age: 3,
+      max_age: 5
     }
     headers = { 'CONTENT_TYPE' => 'application/json' }
 
@@ -186,8 +187,9 @@ RSpec.describe 'The pets API' do
     pe5 = Pet.create(name: 'arm', sex: 'female', bio: 'woof', breed: 'husky', weight: 5, age: 3, user_id: us1.id)
 
     pet_params = {
-      breed: 'cat',
       sex: 'male',
+      min_weight: 3,
+      max_weight: 6
     }
     headers = { 'CONTENT_TYPE' => 'application/json' }
 
@@ -195,7 +197,7 @@ RSpec.describe 'The pets API' do
     response_body = JSON.parse(response.body, symbolize_names: true)
 
     pet = response_body[:data]
-
-    expect(pet.count).to eq(0)
-  end 
+    
+    expect(pet).to eq(nil)
+  end
 end
