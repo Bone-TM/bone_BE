@@ -34,8 +34,8 @@ module Api
       end
 
       def search
-        Pet.search(pet_params)
-
+        pets = Pet.search(pet_params)
+        render json: PetSerializer.new(pets)
       end
 
       private
