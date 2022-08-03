@@ -197,7 +197,7 @@ RSpec.describe 'The pets API' do
     response_body = JSON.parse(response.body, symbolize_names: true)
 
     pet = response_body[:data]
-    
-    expect(pet).to eq(nil)
+
+    expect(pet.count).to eq(0)
   end
 end
