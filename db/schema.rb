@@ -10,41 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_27_160827) do
-
+ActiveRecord::Schema.define(version: 20_220_727_160_827) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "matches", force: :cascade do |t|
-    t.bigint "pet_id"
-    t.integer "matched_pet_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["pet_id"], name: "index_matches_on_pet_id"
+  create_table 'matches', force: :cascade do |t|
+    t.bigint 'pet_id'
+    t.integer 'matched_pet_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['pet_id'], name: 'index_matches_on_pet_id'
   end
 
-  create_table "pets", force: :cascade do |t|
-    t.string "name"
-    t.string "breed"
-    t.string "sex"
-    t.string "bio"
-    t.integer "weight"
-    t.integer "age"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_pets_on_user_id"
+  create_table 'pets', force: :cascade do |t|
+    t.string 'name'
+    t.string 'breed'
+    t.string 'sex'
+    t.string 'bio'
+    t.integer 'weight'
+    t.integer 'age'
+    t.bigint 'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_pets_on_user_id'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "bio", default: ""
-    t.string "email"
-    t.string "location", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'users', force: :cascade do |t|
+    t.string 'name'
+    t.string 'bio', default: ''
+    t.string 'email'
+    t.string 'location', default: ''
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  add_foreign_key "matches", "pets"
-  add_foreign_key "pets", "users"
+  add_foreign_key 'matches', 'pets'
+  add_foreign_key 'pets', 'users'
 end
